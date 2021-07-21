@@ -10,8 +10,7 @@ router.post('/signup', (req, res) => {
     const { username, email, password } = req.body;
     console.log(username, email, password);
 
-    // -----SERVER SIDE VALIDATION ----------
-    /* 
+
     if (!username || !email || !password) {
         res.status(500)
           .json({
@@ -33,7 +32,7 @@ router.post('/signup', (req, res) => {
       });
       return;  
     }
-    */
+
 
     // NOTE: We have used the Sync methods here. 
     // creating a salt 
@@ -61,12 +60,11 @@ router.post('/signup', (req, res) => {
         })
 });
 
-// will handle all POST requests to http:localhost:5005/api/signin
+
 router.post('/signin', (req, res) => {
     const { email, password } = req.body;
 
-    // -----SERVER SIDE VALIDATION ----------
-    /*
+  
     if ( !email || !password) {
         res.status(500).json({
             error: 'Please enter Username. email and password',
@@ -80,17 +78,17 @@ router.post('/signin', (req, res) => {
         })
         return;  
     }
-    */
 
-    // Find if the user exists in the database 
+
+   
     UserModel.findOne({ email })
         .then((userData) => {
-            //check if passwords match
+          
             bcrypt.compare(password, userData.passwordHash)
                 .then((doesItMatch) => {
-                    //if it matches
+                  
                     if (doesItMatch) {
-                        // req.session is the special object that is available to you
+                       
                         userData.passwordHash = "***";
                         req.session.loggedInUser = userData;
                         res.status(200).json(userData)
