@@ -14,7 +14,7 @@ const userSchema = new Schema({
     require: true,
   }, 
 
-  userID: { //The user’s Spotify user ID,  do we need to have this in the user model?  sign in with spotify
+  userID: { //The user’s Spotify user ID, do we need to have this in the user model?  sign in with spotify
     type: String,
     require: true,
   }, 
