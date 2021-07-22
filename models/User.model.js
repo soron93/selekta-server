@@ -1,27 +1,20 @@
 const { Schema, model } = require("mongoose");
 
-const userSchema = new Schema({
+// 1. Define your schema
+let UserSchema = new Schema({
+  name: String, 
   email: {
     type: String,
-    require: true,
-    unique: true
+    required: true
   },
-  
-  password: String,
-
-  username: {
+  passwordHash: {
     type: String,
-    require: true,
-  }, 
+    required: true
+  }
+})
 
-  userID: { //The user’s Spotify user ID, do we need to have this in the user model?  sign in with spotify
-    type: String,
+// 2. Define your model
+let UserModel = model('user', UserSchema)
 
-  }, 
-
-  userPlayList: [{type: Schema.Types.ObjectId, ref: 'PlayList'}]
-});
-
-const User = model("User", userSchema);
-
-module.exports = User;
+// 3. Export your Model with 'module.exports'
+module.exports = UserModel
