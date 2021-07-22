@@ -8,3 +8,5 @@ router.get("/testemmy", (req, res, next) => {
     res.json("All good in the router");
   });
   
+
+  module.exports = router;
