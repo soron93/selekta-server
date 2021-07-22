@@ -11,4 +11,5 @@ router.get('/testemmy', (req, res) => {
           
 })
 
+//test routes ok
 module.exports = router;
