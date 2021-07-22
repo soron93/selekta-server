@@ -66,7 +66,7 @@ router.post('/signin', (req, res) => {
     const {email, password } = req.body;
 
     // -----SERVER SIDE VALIDATION ----------
-    
+    /*
     if ( !email || !password) {
         res.status(500).json({
             error: 'Please enter Username. email and password',
@@ -79,7 +79,7 @@ router.post('/signin', (req, res) => {
             error: 'Email format not correct',
         })
         return;  
-    }
+    }*/
     
   
     // Find if the user exists in the database 

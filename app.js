@@ -31,7 +31,7 @@ app.use(session({
     },
     store: new MongoStore({
     //   mongoUrl: process.env.MONGODB_URI || "mongodb://localhost/ReactTodos",
-      mongoUrl: process.env.MONGODB_URI || "mongodb://localhost/todo-app",
+      mongoUrl: process.env.MONGODB_URI || "mongodb://localhost/selekta-app",
       ttl: 60*60*24, // is in seconds. expiring in 1 day
     })
 }));
@@ -55,7 +55,7 @@ const fileUploadRoutes = require('./routes/file-upload.routes')
 app.use("/api",fileUploadRoutes);
 
 // const stripeRoutes = require('./routes/stripe.routes')
-// app.use("/api",stripeRoutes);
+// app.use("/api",stripeRoutes);ç
 const testRoutes = require("./routes/test.routes");
 app.use("/api", testRoutes);
 
