@@ -31,7 +31,7 @@ app.use(session({
     },
     store: new MongoStore({
     //   mongoUrl: process.env.MONGODB_URI || "mongodb://localhost/ReactTodos",
-      mongoUrl: process.env.MONGODB_URI || "mongodb://localhost/todo-app",
+      mongoUrl: process.env.MONGODB_URI || "mongodb://localhost/selekta-app",
       ttl: 60*60*24, // is in seconds. expiring in 1 day
     })
 }));

@@ -1,12 +1,12 @@
 const express = require('express')
 const router = express.Router()
 
-let TodoModel = require('../models/Todo.model')
+let PlayListModel = require('../models/PlayList.model')
 
 // NOTE: All your API routes will start from /api 
 
 // will handle all GET requests to http:localhost:5005/api/todos
-router.get('/todos', (req, res) => {
+router.get('/shade', (req, res) => {
      TodoModel.find()
           .then((todos) => {
                res.status(200).json(todos)
