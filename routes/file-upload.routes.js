@@ -2,7 +2,7 @@ const express = require('express');
 const router  = express.Router();
 
 // include CLOUDINARY:
-const uploader = require('../middlewares/cloudinary.config.jsx');
+const uploader = require('../middlewares/cloudinary.config.js');
 
 // ensure you have an input type like this in your hbs file
 /*
