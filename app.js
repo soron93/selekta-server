@@ -54,10 +54,18 @@ app.use("/api", authRoutes);
 const fileUploadRoutes = require('./routes/file-upload.routes')
 app.use("/api",fileUploadRoutes);
 
-// const stripeRoutes = require('./routes/stripe.routes')
-// app.use("/api",stripeRoutes);ç
+//TEST ROUTES
 const testRoutes = require("./routes/test.routes");
 app.use("/api", testRoutes);
+
+const searchtestRoutes = require("./routes/searchtest.routes");
+app.use("/api", searchtestRoutes);
+
+const randomRoutes = require("./routes/random.routes");
+app.use("/api", randomRoutes);
+
+const profileRoutes = require("./routes/profile.routes");
+app.use("/api", profileRoutes );
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
