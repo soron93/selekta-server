@@ -1,85 +1,64 @@
-const express = require('express')
-const router = express.Router()
+require('dotenv').config();
 
-let PlayListModel = require('../models/PlayList.model')
+const express = require('express');
+const router = require("express").Router();
 
-// NOTE: All your API routes will start from /api 
 
-// will handle all GET requests to http:localhost:5005/api/todos
-router.get('/shade', (req, res) => {
-     TodoModel.find()
-          .then((todos) => {
-               res.status(200).json(todos)
-          })
-          .catch((err) => {
-               res.status(500).json({
-                    error: 'Something went wrong',
-                    message: err
-               })
-          })         
-})
+// require spotify-web-api-node package here:
+const SpotifyWebApi = require('spotify-web-api-node');
 
-// will handle all POST requests to http:localhost:5005/api/create
 
-router.post('/create', (req, res) => {  
-    const {name, description, completed} = req.body;
-    console.log(req.body)
-    TodoModel.create({name: name, description: description, completed: completed})
-          .then((response) => {
-               res.status(200).json(response)
-          })
-          .catch((err) => {
-               res.status(500).json({
-                    error: 'Something went wrong',
-                    message: err
-               })
-          })  
-})
+// setting the spotify-api goes here:
+const spotifyApi = new SpotifyWebApi({
+    clientId: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET
+  });
+  
+  // Retrieve an access token
+  spotifyApi
+    .clientCredentialsGrant()
+    .then(data => spotifyApi.setAccessToken(data.body['access_token']))
+    .catch(error => console.log('Something went wrong when retrieving an access token', error));
 
-// will handle all GET requests to http:localhost:5005/api/todos/:todoId
-//PS: Don't type :todoId , it's something dynamic, 
-router.get('/todos/:todoId', (req, res) => {
-    TodoModel.findById(req.params.todoId)
-     .then((response) => {
-          res.status(200).json(response)
-     })
-     .catch((err) => {
-          res.status(500).json({
-               error: 'Something went wrong',
-               message: err
-          })
-     }) 
-})
+// // Our routes go here:
+router.get('/', (req, res) => {
+    res.status(200).json(user);
+  });
 
-// will handle all DELETE requests to http:localhost:5005/api/todos/:id
-router.delete('/todos/:id', (req, res) => {
-    TodoModel.findByIdAndDelete(req.params.id)
-          .then((response) => {
-               res.status(200).json(response)
-          })
-          .catch((err) => {
-               res.status(500).json({
-                    error: 'Something went wrong',
-                    message: err
-               })
-          })  
-})
+  router.get('/artist-search', (req, res) => {
+    spotifyApi
+    .searchArtists(req.query.q)
+    .then(data => {
+        console.log('The received data from the API: ', data.body.artists.items);
+        // res.render('artist-search-results', {artistInfo: data.body.artists.items});
+        res.json({artistInfo: data.body.artists.items});
+    })
+    .catch(err => console.log('The error while searching artists occurred: ', err));
+  })
 
-// will handle all PATCH requests to http:localhost:5005/api/todos/:id
-router.patch('/todos/:id', (req, res) => {
-    let id = req.params.id
-    const {name, description, completed} = req.body;
-    TodoModel.findByIdAndUpdate(id, {$set: {name: name, description: description, completed: completed}}, {new: true})
-          .then((response) => {
-               res.status(200).json(response)
-          })
-          .catch((err) => {
-               console.log(err)
-               res.status(500).json({
-                    error: 'Something went wrong',
-                    message: err
-               })
-          }) 
-})
+  router.get('/albums/:artistId', (req, res, next) => {
+    spotifyApi
+    .getArtistAlbums(req.params.artistId) 
+    .then(data => {
+        console.log('The received data from the API: ', data.body.items);
+        // res.render('albums', {albumInfo: data.body.items});
+        res.json({albumInfo: data.body.items});
+    })
+    .catch(err => console.log('The error while searching albums occurred: ', err));
+  });
+
+  router.get('/tracks/:albumId', (req, res, next) => {
+    spotifyApi
+    .getAlbumTracks(req.params.albumId) 
+    .then(data => {
+        console.log('The received data from the API: ', data.body.items);
+        //res.render('tracks', {trackList: data.body.items});
+        res.json({trackList: data.body.items})
+    })
+    .catch(err => console.log('The error while searching albums occurred: ', err));
+  });
+
+
+// app.listen(3000, () => console.log('My Spotify project running on port 3000 🎧 🥁 🎸 🔊'));
 
 module.exports = router;
