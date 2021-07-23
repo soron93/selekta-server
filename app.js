@@ -67,6 +67,10 @@ app.use("/api", randomRoutes);
 const profileRoutes = require("./routes/profile.routes");
 app.use("/api", profileRoutes );
 
+const spotifyloginRoutes = require("./routes/spotifylogin.routes");
+app.use("/api", spotifyloginRoutes );
+
+
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
 
