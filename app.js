@@ -45,8 +45,6 @@ app.use(session({
 const allRoutes = require("./routes");
 app.use("/api", allRoutes);
 
-// const todoRoutes = require("./routes/todo.routes");
-// app.use("/api", todoRoutes);
 
 const authRoutes = require("./routes/auth.routes");
 app.use("/api", authRoutes);
