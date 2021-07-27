@@ -109,13 +109,26 @@ let newTracks = tracks.map((track)=>{
 })
 
 TracksModel.insertMany(newTracks)
-  .then(()=>{
-    res.status(200).json({})
+  .then((dbTracks)=>{
+    let trackIds = dbTracks.map( (track ) => {
+      return track._id
+
+    })
+    PlaylistModel.create({name:playlistName, user:req.session.loggedInUser._id, tracks:trackIds})
+    .then(()=>{
+      res.status(200).json({})
+    })
+    .catch((err) => {
+      res.status(500).json(err)
+    })
+ 
   })
   .catch((err)=>{
     console.log(err)
+    res.status(500).json(err)
   })
 })
+
 
 
 // app.listen(3000, () => console.log('My Spotify project running on port 3000 🎧 🥁 🎸 🔊'));
