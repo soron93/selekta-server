@@ -15,7 +15,7 @@ let UserSchema = new Schema({
     type: String,
   },
   selekta: {
-    ref: "User",
+    ref: "user",
     type: Schema.Types.ObjectId,
   },
 })
