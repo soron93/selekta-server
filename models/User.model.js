@@ -10,7 +10,14 @@ let UserSchema = new Schema({
   passwordHash: {
     type: String,
     required: true
-  }
+  },
+  profilePic: {
+    type: String,
+  },
+  selekta: {
+    ref: "User",
+    type: Schema.Types.ObjectId,
+  },
 })
 
 // 2. Define your model
