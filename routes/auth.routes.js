@@ -143,11 +143,33 @@ const isLoggedIn = (req, res, next) => {
   };
 };
 
-
 // THIS IS A PROTECTED ROUTE
 // will handle all get requests to http:localhost:5005/api/user
 router.get("/user", isLoggedIn, (req, res, next) => {
   res.status(200).json(req.session.loggedInUser);
 });
+
+
+// To user profile
+router.get("/profile", (req, res, nex) => {
+  if ((req.app.locals.isLoggedIn = true)) {
+    let id = req.session.loggedInUser._id;
+    let user = req.session.loggedInUser;
+
+    UserModel.find({ selekta: id })
+      .then(() => {
+        res.render("profile", { user });
+      })
+      .catch((err) => {
+        next(err);
+      });
+  } else {
+    res.redirect("/login");
+  }
+});
+
+
+
+
 
 module.exports = router;
