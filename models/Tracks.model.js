@@ -1,34 +1,21 @@
 const { Schema, model } = require("mongoose");
 
-const PlaylistSchema = new Schema({
+const TrackSchema = new Schema({
 
     name: String,
-    description: String,
-    user_id: String,
-    public: False,
-    collaberative: Boolean,
 
-    song: {
-        type: String,
-        enum: ["The Unforgettables", "Contemporary Classics", "New Era Drinks"],  // CHECK API TO SEE HOW TO CREATE THIS MODEL// ℹ️  // ❗
-        default: "The Unforgettables"
-    },
+    artists:String  ,//
 
-    CoverImage: String, // ℹ️ // ❗
-    tags: [String],
-    feedback: [
-        {
-            user: {
-                ref: 'User',
-                type: Schema.Types.ObjectId // ❗
-            },
+    spotifyId: String,
 
-        }
+    preview_url: String,
 
-    ],
+    external_urls: String
+
+    //grab img url later 
 
 });
 
-const PlayList = model("PlayList", PlaylistSchema);
+const Track = model("Track", TrackSchema);
 
-module.exports = PlayList;
+module.exports = Track;
