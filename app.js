@@ -45,22 +45,8 @@ app.use(session({
 const allRoutes = require("./routes");
 app.use("/api", allRoutes);
 
-
 const authRoutes = require("./routes/auth.routes");
 app.use("/api", authRoutes);
-
-const fileUploadRoutes = require('./routes/file-upload.routes')
-app.use("/api",fileUploadRoutes);
-
-//TEST ROUTES
-const testRoutes = require("./routes/test.routes");
-app.use("/api", testRoutes);
-
-const searchtestRoutes = require("./routes/searchtest.routes");
-app.use("/api", searchtestRoutes);
-
-const randomRoutes = require("./routes/random.routes");
-app.use("/api", randomRoutes);
 
 const profileRoutes = require("./routes/profile.routes");
 app.use("/api", profileRoutes );
