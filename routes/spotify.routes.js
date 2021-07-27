@@ -6,7 +6,8 @@ const router = require("express").Router();
 
 // require spotify-web-api-node package here:
 const SpotifyWebApi = require('spotify-web-api-node');
-
+const TracksModel = require('../models/Tracks.model')
+const PlaylistModel = require('../models/Playlist.model')
 
 // setting the spotify-api goes here:
 const spotifyApi = new SpotifyWebApi({
@@ -89,6 +90,41 @@ router.post('/generate-playlist', (req, res) => {
     });
 
 })
+
+
+router.post('/create-playlist', (req, res) => {
+  const{
+    playlistName,
+    tracks,
+  } = req.body;
+
+let newTracks = tracks.map((track)=>{
+  return {
+    name:track.name,
+    artists:track.artists[0].name,
+    spotifyId:track.id,
+    preview_url:track.preview_url,
+    external_urls:track.external_urls.spotify,
+  }
+})
+
+TracksModel.insertMany(newTracks)
+  .then(()=>{
+    res.status(200).json({})
+  })
+  .catch((err)=>{
+    console.log(err)
+  })
+})
+
+
 // app.listen(3000, () => console.log('My Spotify project running on port 3000 🎧 🥁 🎸 🔊'));
 
 module.exports = router;
+
+
+
+
+
+
+

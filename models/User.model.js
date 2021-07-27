@@ -13,11 +13,7 @@ let UserSchema = new Schema({
   },
   profilePic: {
     type: String,
-  },
-  selekta: {
-    ref: "user",
-    type: Schema.Types.ObjectId,
-  },
+  }
 })
 
 // 2. Define your model

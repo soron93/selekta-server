@@ -151,7 +151,8 @@ router.get("/user", isLoggedIn, (req, res, next) => {
 
 
 // To user profile
-router.get("/profile", (req, res, nex) => {
+router.post("/profile", isLoggedIn, (req, res, nex) => {
+  const {email, password } = req.body;
   if ((req.app.locals.isLoggedIn = true)) {
     let id = req.session.loggedInUser._id;
     let user = req.session.loggedInUser;
