@@ -12,7 +12,7 @@ let PlaylistSchema = new Schema({
     }],
 
     user: {
-      type: Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId, // user 
       ref: "user"
     }
   }
