@@ -28,6 +28,22 @@ router.get('/playlist/:id', (req, res) => {
    
 })
 
+router.delete('/playlist/:id/:trackid', (req, res) => {
+  let trackid = req.params.trackid
+  let id = req.params.id // on signing  session is created   can be  reused in the code like a global variables
+  PlaylistModel.findByIdAndUpdate(id, {
+    $pull: {tracks: trackid }
+  })
+     .then((playlist)=>{
+       res.status(200).json(playlist)
+     })
+     .catch((err) => {
+       res.status(500).json(err)
+     })
+   
+})
+
+
 
 //test routes ok
 module.exports = router;
