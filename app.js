@@ -66,11 +66,8 @@ app.use((req, res, next) => {
 	res.sendFile(__dirname + "/public/index.html");
 });
 
-<<<<<<< HEAD
-=======
 
 
->>>>>>> 10c201012c5ac563638f57ffe1ca63ace4a9c0ee
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
 

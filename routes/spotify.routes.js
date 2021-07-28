@@ -23,9 +23,9 @@ spotifyApi
 
 
 
-router.get('/artist-search', (req, res) => {
+router.get('/new-releases', (req, res) => {
   spotifyApi
-    .searchArtists(req.query.q)
+    .searchA(req.query.q)
     .then(data => {
       console.log('The received data from the API: ', data.body.artists.items);
       // res.render('artist-search-results', {artistInfo: data.body.artists.items});
@@ -34,27 +34,7 @@ router.get('/artist-search', (req, res) => {
     .catch(err => console.log('The error while searching artists occurred: ', err));
 })
 
-router.get('/albums/:artistId', (req, res, next) => {
-  spotifyApi
-    .getArtistAlbums(req.params.artistId)
-    .then(data => {
-      console.log('The received data from the API: ', data.body.items);
-      // res.render('albums', {albumInfo: data.body.items});
-      res.json({ albumInfo: data.body.items });
-    })
-    .catch(err => console.log('The error while searching albums occurred: ', err));
-});
 
-router.get('/tracks/:albumId', (req, res, next) => {
-  spotifyApi
-    .getAlbumTracks(req.params.albumId)
-    .then(data => {
-      console.log('The received data from the API: ', data.body.items);
-      //res.render('tracks', {trackList: data.body.items});
-      res.json({ trackList: data.body.items })
-    })
-    .catch(err => console.log('The error while searching albums occurred: ', err));
-});
 
 // Hard coded response from API
 router.post('/generate-playlist', (req, res) => {
