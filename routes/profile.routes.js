@@ -27,17 +27,7 @@ const PlaylistModel = require('../models/Playlist.model')
             })
           
         })
-//new reslese using npm package
-      router.get('/new-release', (req, res) => {
-         spotifyApi
-          .getNewReleases({ limit : 5, offset: 0, country: 'SE' })
-          .then(function(data) {
-            console.log(data.body);
-              done();
-            }, function(err) {
-              console.log("Something went wrong!", err);
-           });
-         });
+
          
 router.delete('/playlist/:id/:trackid', (req, res) => {
   let trackid = req.params.trackid

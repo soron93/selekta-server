@@ -51,16 +51,18 @@ router.post('/generate-playlist', (req, res) => {
 
 
   spotifyApi.getRecommendations({
-    min_danceability,
-    // max_danceability,
-    // min_acousticness,
-    // max_acousticness,
-    // min_speechiness,
-    // max_speechiness,
-    // min_popularity,
-    // max_popularity,
-    seed_genres: ['pop'],
-    //min_popularity: 50
+   
+    max_danceability,
+
+    max_acousticness,
+ 
+    max_speechiness,
+    
+    max_popularity,
+    seed_genres:
+     ["indie","techno", "hip-hop",
+     "pop", "rock"]
+
   })
     .then(function (data) {
       let recommendations = data.body;
