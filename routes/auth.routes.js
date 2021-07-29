@@ -157,7 +157,7 @@ router.post("/profile", isLoggedIn, (req, res, nex) => {
     let id = req.session.loggedInUser._id;
     let user = req.session.loggedInUser;
 
-    UserModel.find({ selekta: id })
+    UserModel.find({ user: id })
       .then(() => {
         res.render("profile", { user });
       })

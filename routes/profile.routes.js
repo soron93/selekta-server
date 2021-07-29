@@ -38,6 +38,34 @@ const PlaylistModel = require('../models/Playlist.model')
               console.log("Something went wrong!", err);
            });
          });
+         
+router.delete('/playlist/:id/:trackid', (req, res) => {
+  let trackid = req.params.trackid
+  let id = req.params.id // on signing  session is created   can be  reused in the code like a global variables
+  PlaylistModel.findByIdAndUpdate(id, {
+    $pull: {tracks: trackid }
+  })
+     .then((playlist)=>{
+       res.status(200).json(playlist)
+     })
+     .catch((err) => {
+       res.status(500).json(err)
+     })
+   
+})
+
+router.patch('/playlist/:id', (req, res) => {
+  const {name} = req.body;
+  let id = req.params.id // on signing  session is created   can be  reused in the code like a global variables
+  PlaylistModel.findByIdAndUpdate(id, {name})
+     .then((playlist)=>{
+       res.status(200).json(playlist)
+     })
+     .catch((err) => {
+       res.status(500).json(err)
+     })
+   
+})
 
 //test routes ok
 module.exports = router;
